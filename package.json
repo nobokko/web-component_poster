@@ -1,0 +1,17 @@
+{
+  "name": "wc-poster",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "npm-install-local": "npm link ts-loader html-loader @types/node",
+    "tsc": "tsc",
+    "tscw": "tsc --watch",
+    "prepare": "webpack --config webpack.config.js",
+    "watch": "webpack --config webpack.config.dev.js --watch",
+    "start-dev-server":"webpack-dev-server --config webpack.config.dev.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
