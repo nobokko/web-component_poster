@@ -1,0 +1,100 @@
+<style>
+    :host {
+        position: fixed;
+        bottom: 0;
+        width: 99vw;
+        max-height: 50vh;
+    }
+
+    #request_info {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-flow: row wrap;
+    }
+
+    #request_info>* {
+        flex: 1;
+    }
+
+    #request_method {
+        max-width: 5rem;
+    }
+
+    #request_url {
+        min-width: 5rem;
+        flex-grow: 100;
+    }
+
+    #details_query_params {
+        min-width: 95%;
+        max-width: 95%;
+        margin-left: 1rem;
+    }
+
+    #details_query_params[open] {
+        max-height: 6rem;
+        position: relative;
+        overflow: scroll;
+    }
+
+    #details_query_params[open] summary {
+        position: sticky;
+        top: 0;
+    }
+
+    #details_query_params[open] #btn_query_params_add {
+        position: sticky;
+        bottom: 0;
+    }
+
+    #response_info {
+        overflow: scroll;
+        max-height: 25vh;
+    }
+
+    #detail_response_body:not([open]) {
+        max-width: 6rem;
+    }
+
+    #detail_response_headers:not([open]) {
+        max-width: 6rem;
+    }
+</style>
+<template id="template_query_params_add">
+    <input type="text" name="query_params_key" placeholder="key">
+    <input type="text" name="query_params_value" placeholder="value">
+</template>
+<details>
+    <summary>poster</summary>
+    <div name="request_info" id="request_info">
+        <input list="request_methods_list" name="request_method" id="request_method" placeholder="method" value="GET">
+        <datalist id="request_methods_list">
+            <option value="GET"></option>
+            <option value="POST"></option>
+        </datalist>
+        <input list="request_urls_list" type="text" name="request_url" id="request_url" placeholder="request url">
+        <datalist id="request_urls_list">
+            <option value="https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json"></option>
+        </datalist>
+        <details id="details_query_params">
+            <summary>Query Params</summary>
+            <ul id="list_query_params">
+            </ul>
+            <button name="btn_query_params_add" id="btn_query_params_add" value="add">add</button>
+        </details>
+    </div>
+    <button name="btn_send" id="btn_send" value="send">send</button>
+    <div name="response_info" id="response_info" style="display: none;">
+        <div name="response_type" id="response_type"></div>
+        <div name="response_status" id="response_status"></div>
+        <details id="detail_response_body">
+            <summary>body</summary>
+            <div name="response_text" id="response_text"></div>
+        </details>
+        <details id="detail_response_headers">
+            <summary>headers</summary>
+            <div name="response_headers" id="response_headers"></div>
+        </details>
+    </div>
+</details>
