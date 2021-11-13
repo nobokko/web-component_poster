@@ -1,4 +1,2 @@
-node_modules/.package-lock.json
-node_modules/@types/node
-node_modules/html-loader
-node_modules/ts-loader
+node_modules
+dist/coverage

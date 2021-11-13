@@ -4,13 +4,14 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "npm-install-local": "npm link ts-loader html-loader @types/node",
+    "npm-install-local": "npm link ts-loader html-loader @types/node @types/jest cross-fetch",
     "tsc": "tsc",
     "tscw": "tsc --watch",
     "prepare": "webpack --config webpack.config.js",
     "watch": "webpack --config webpack.config.dev.js --watch",
-    "start-dev-server":"webpack-dev-server --config webpack.config.dev.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-dev-server": "webpack-dev-server --config webpack.config.dev.js",
+    "test": "jest --coverage",
+    "watch-test": "jest --watch"
   },
   "author": "",
   "license": "ISC"

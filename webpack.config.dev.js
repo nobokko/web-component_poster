@@ -68,5 +68,13 @@ module.exports = {
                 usePolling: false,
             },
         },
+        onBeforeSetupMiddleware: function (devServer) {
+            devServer.app.get("/get/path", function (req, res) {
+                res.json({ custom: "response - get" });
+            });
+            devServer.app.post("/post/path", function (req, res) {
+                res.json({headers:req.headers, params:req.params,query:req.query, custom: "response - post" });
+            });
+        },
     }
 };
