@@ -69,11 +69,34 @@ module.exports = {
             },
         },
         onBeforeSetupMiddleware: function (devServer) {
+            let bodyParser = require('body-parser');
+            let multer = require('multer');
+            // application/x-www-form-urlencoded
+            devServer.app.use(bodyParser.urlencoded({ extended: false }));
+            // application/json
+            devServer.app.use(bodyParser.json());
+            // multipart/form-data
+            devServer.app.use(multer().array());
+            // application/octet-stream
+            devServer.app.use(bodyParser.raw());
+            // default: text/plain
+            devServer.app.use(bodyParser.text({
+                type: (req) => {
+                    let typeis = require('type-is');
+                    return !typeis(req, [
+                        'application/json',
+                        'application/octet-stream',
+                        'application/x-www-form-urlencoded',
+                        'multipart/form-data',
+                    ]);
+                }
+            }));
+
             devServer.app.get("/get/path", function (req, res) {
                 res.json({ custom: "response - get" });
             });
             devServer.app.post("/post/path", function (req, res) {
-                res.json({headers:req.headers, params:req.params,query:req.query, custom: "response - post" });
+                res.json({ headers: req.headers, params: req.params, query: req.query, custom: "response - post", body: req.body });
             });
         },
     }

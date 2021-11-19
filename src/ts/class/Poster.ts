@@ -87,7 +87,7 @@ export class Poster extends HTMLElement {
                     init_method['method'] = ele.value;
                 }
             });
-            let init_body: { body?: FormData } = {};
+            let init_body: { body?: FormData | string } = {};
             let formData: FormData | null = null;
             this.#shadowRoot.querySelectorAll<HTMLElement>('#list_query_params li').forEach(ele => {
                 let key = ele.querySelector<HTMLInputElement>('[name="query_params_key"]');
@@ -102,6 +102,7 @@ export class Poster extends HTMLElement {
                 }
             });
             if (formData) {
+                // init_body['body'] = JSON.stringify([...(formData as FormData).entries()].reduce((obj: {[key: string]: any}, val)=>{obj[val[0]] = val[1];return obj;}, {}));
                 init_body['body'] = formData;
             }
 
@@ -109,7 +110,11 @@ export class Poster extends HTMLElement {
                 ...init_method,
                 ...init_body,
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
+                    // 'Content-Type': 'application/x-www-form-urlencoded'
+                    // 'Content-Type': 'application/json',
+                    // 'Content-Type': 'multipart/form-data', // Boundary
+                    // 'Content-Type': 'application/octet-stream',
+                    // 'Content-Type': 'image/png',
                 }
             };
 
